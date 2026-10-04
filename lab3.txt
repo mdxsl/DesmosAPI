@@ -1,0 +1,89 @@
+Maddux Seal
+Server-Side Programming
+Lab 3
+9/25/26
+
+Desmos API
+1. Research
+The purpose of this API is to put math calculators and functions inside an application or website. This API is a GraphingCalculator object that provides:
+•	Interactive coordinate plane
+•	Plotting equations, inequalities, and functions
+•	Set expressions, change viewport, and control display features
+•	Custom options
+As a developer, I can take the mathematic tools and use them in my own app that needs it. This can serve many applications with recording statistics, representing data, and calculating equations. I could use this for mathematic, financial, scientific, physics, or artificial intelligence purposes.
+
+
+2. Software Planning
+The Python server will act as a central coordinator serving the web application, storing persistent graph data, and managing custom backend logic.
+1.	The browser loads the Desmos JavaScript library directly from Desmos’s servers. The Desmos API manages the real-time math rendering on the frontend.
+2.	Whenever graph data needs to be saved or loaded, the frontend uses JavaScript fetch() calls to send or request JSON payloads to/from the Python server without reloading the page.
+3.	Python routes requests, processes any data, and communicates with a database to persist graph states.
+API calls will be made in the following situations:
+STEP 1: Page Load
+API Call - User Browser -> Desmos CDN : Fetch Desmos Library, GET
+User navigates to my web application in their browser.
+STEP: 2: Render
+The browser executes local JavaScript to render the interactive calculator inside a <div> element locally.
+STEP 3: Click Save
+API Call - User Browser -> Python Backend : POST
+The user creates a graph and clicks a “Save Graph” button. JavaScript turns this into a JSON object.
+STEP 4: Select Graph
+API Call - User Action -> Python Backend : GET
+The user selects a previously saved graph from a dropdown menu.
+STEP 5: Generate
+API Call - User Action -> Python Backend : POST
+The  user requests a complex calculation or mathematical preset generated server-side by Python.
+
+3. API Use Documentation
+1. Load Desmos API Library
+URL example: 
+GET [https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b14ae9fe26974cbof7ed]
+
+Request JSON Payload:
+None
+
+Response JSON Payload:
+None
+
+Interaction Description:
+When the browser loads the web page, it sends an external request to Desmos’s Content Delivery Network to download the graphing calculator library. This script provides the global Desmos JavaScript object used to instantiate and control the interactive graph widget.
+
+2. Save Graph State
+URL Path Example:
+POST http://localhost:5000/api/graphs
+
+Request JSON Payload:
+lab3.JSON1
+
+Response JSON Payload:
+lab3.JSON2
+
+Interaction Description:
+The user enters a title and clicks “Save Graph”. The frontend calls a method to retrieve the calculator’s current state as a JSON object and sends it via a POST request to the Python backend. Python validates it and saves it into the database.
+
+3. Retrieve Saved Graph
+URL Path Example:
+GET http://localhost:5000/api/graphs/42
+
+Request JSON Payload:
+None
+
+Response JSON Payload:
+lab.JSON3
+
+Interaction Description:
+The user selects a graph from a dropdown menu. The frontend sends a GET request to the Python backend containing the graph ID. Python queries the database and returns the graph data. The frontend then calls a method to re-render the saved expressions and bounds in the calculator. 
+
+4. Generate Server-Side Math Expression
+URL Path Example:
+POST http://localhost:5000/api/generate-expressions
+
+Request JSON Payload:
+lab.JSON4
+
+Response JSON Payload:
+lab.JSON5
+
+Interaction Description:
+The user requests a complex function generated from Python math logic. The frontend posts parameters to the backend, Python calculates the equation and returns it.
+

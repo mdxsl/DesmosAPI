@@ -1,0 +1,27 @@
+{
+  "title": "Sine Wave Experiment",
+  "description": "Harmonic motion graph",
+  "state": {
+    "version": 9,
+    "randomSeed": "b47c92f1",
+    "graph": {
+      "viewport": {
+        "xmin": -10,
+        "xmax": 10,
+        "ymin": -5,
+        "ymax": 5
+      }
+    },
+    "expressions": {
+      "list": [
+        {
+          "id": "1",
+          "type": "expression",
+          "latex": "y=\\sin(x)",
+          "color": "#c0392b"
+        }
+      ]
+    }
+  }
+}
+

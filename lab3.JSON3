@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "graph": {
+    "id": 42,
+    "title": "Sine Wave Experiment",
+    "state": {
+      "version": 9,
+      "graph": {
+        "viewport": { "xmin": -10, "xmax": 10, "ymin": -5, "ymax": 5 }
+      },
+      "expressions": {
+        "list": [
+          {
+            "id": "1",
+            "type": "expression",
+            "latex": "y=\\sin(x)",
+            "color": "#c0392b"
+          }
+        ]
+      }
+    }
+  }
+}
