@@ -27,3 +27,22 @@ async function saveGraph() {
         alert("Failed to save graph.");
     }
 }
+
+// Load Graph
+async function loadGraph() {
+    const graphID = document.getElementById('loadID').value;
+    if (!graphID) {
+        alert("Please enter a valid graph ID.");
+        return;
+    }
+
+    const response = await fetch('/api/graphs/${graphID}');
+    const result = await response.json();
+
+    if (response.ok) {
+        calculator.setState(result.graph.state);
+        alert('Loaded graph: "${result.graph.title}"');
+    } else {
+        alert(result.detail || "Error loading graph.");
+    }
+}
