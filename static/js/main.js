@@ -22,7 +22,7 @@ async function saveGraph() {
 
     const result = await response.json();
     if (response.ok) {
-        alert('${result.message} Assigned ID: ${result.graph_id}');
+        alert(`${result.message} Assigned ID: ${result.graph_id}`);
     } else {
         alert("Failed to save graph.");
     }
@@ -41,7 +41,7 @@ async function loadGraph() {
 
     if (response.ok) {
         calculator.setState(result.graph.state);
-        alert('Loaded graph: "${result.graph.title}"');
+        alert(`Loaded graph: "${result.graph.title}"`);
     } else {
         alert(result.detail || "Error loading graph.");
     }
