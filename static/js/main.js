@@ -46,3 +46,22 @@ async function loadGraph() {
         alert(result.detail || "Error loading graph.");
     }
 }
+
+// Generate expressions
+async function generateExpression() {
+    const response = await fetch('/api/generate-expression', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            function_type: "fourier_series",
+            terms: 4
+        })
+    })
+
+    const result = await response.json();
+    if (response.ok) {
+        calculator.setExpression({ id: 'fourier1', latex: result.latex });
+    } else {
+        alert("Failed to generate expression.");
+    }
+}

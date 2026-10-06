@@ -1,8 +1,12 @@
-from fastapi import FastAPI, HTTPException
+import os
+from dotenv import load_dotenv
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from typing import Dict, Any
+
+load_dotenv()
+
+DESMOS_API_KEY = os.getenv("DESMOS_API_KEY")
 
 app = FastAPI(title="Desmos + FastAPI Integration")
 
@@ -23,7 +27,10 @@ class GenerateExpressionRequest(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 def get_home_page():
     with open("templates/index.html", "r", encoding="utf-8") as f:
-        return HTMLResponse(content=f.read())
+        html_content = f.read()
+
+    html_content = html_content.replace("{{ DESMOS_API_KEY }}", DESMOS_API_KEY or "")
+    return HTMLResponse(content=html_content)
 
 @app.post("/api/graphs", status_code=201)
 def save_graph(payload: SaveGraphRequest):
