@@ -36,7 +36,7 @@ async function loadGraph() {
         return;
     }
 
-    const response = await fetch('/api/graphs/${graphID}');
+    const response = await fetch(`/api/graphs/${graphID}`);
     const result = await response.json();
 
     if (response.ok) {
