@@ -30,16 +30,29 @@ async function saveGraph() {
 
 // Load Graph
 async function loadGraph() {
-    const graphID = document.getElementById('loadID').value;
+    const inputElement = document.getElementById('loadId');
+
+    if (!inputElement) {
+        console.error("Could not find the ID in index.html.")
+        return;
+    }
+
+    const graphID = inputElement.value.trim();
     if (!graphID) {
         alert("Please enter a valid graph ID.");
         return;
     }
 
     const response = await fetch(`/api/graphs/${graphID}`);
+
+    if (!response.ok) {
+        alert(`Graph with ID ${graphID} not found.`)
+        return;
+    }
+
     const result = await response.json();
 
-    if (response.ok) {
+    if (result.graph && result.graph.state) {
         calculator.setState(result.graph.state);
         alert(`Loaded graph: "${result.graph.title}"`);
     } else {
