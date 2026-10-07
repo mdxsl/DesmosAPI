@@ -4,16 +4,44 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Desmos & FastAPI Integration</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+        <link rel="stylesheet" href="/static/css/style.css?v=1">
         <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=46b18f76f2034f3cba8a3a41b0f7abb2"></script>
         <style>
             body { font-family: Arial, Helvetica, sans-serif; margin: 20px; }
-            #calculator { width: 100%; max-width: 900px; height: 500px; margin-top: 15px; }
+            #calculator { width: 100%; max-width: 2000px; height: 500px; margin-top: 15px; }
             .controls { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
             input, button { padding: 8px 12px; font-size: 14px; }
+            h1 { align-content: center;}
         </style>
     </head>
     <body>
-        <h1>FastAPI & Desmos Integration</h1>
+        <div class="app-container">
+            <header class="app-header">
+                <h1><span class="math-symbol">f(x)</span> Desmos Math Studio</h1>
+                <p class="subtitle">Interactive Graphing & Server-Side Function Library</p>
+            </header>
+
+            <main class="workspace">
+                <div class="controls-card">
+                    <div class="control-group">
+                        <label for="graphTitle">Graph Title</label>
+                        <div class="input-with-button">
+                            <input type="text" id="graphTitle" placeholder="Graph Title">
+                            <button class="btn btn-primary" onclick="saveGraph()">Save Graph</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="loadId">Load Saved Graph</label>
+                        <div class="input-with-button">
+                            <input type="number" id="loadId" placeholder="Enter Graphh ID">
+                            <button class="btn btn-secondary" onclick="loadGraph()">Load</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
 
         <div class="controls">
             <input type="text" id="graphTitle" placeholder="Graph Title">
@@ -23,11 +51,14 @@
         <div class="controls">
             <input type="number" id="loadId" placeholder="Graph ID to Load">
             <button onclick="loadGraph()">Load Graph</button>
+        </div>
+
+        <div class="controls">
             <button onclick="generateExpression()">Generate Expression</button>
         </div>
 
         <div id="calculator"></div>
 
-        <script src="/static/js/main.js"></script>
+        <script src="/static/js/main.js?v=2"></script>
     </body>
 </html>
