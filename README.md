@@ -11,4 +11,4 @@ API calls
 3. Graph wasn't loading when I input ID / my response variable had comma instead of back comma / Added back commas to the text
 4. Cannot read properties of null (reading 'value') / loadId element couldn't be interpreted because of the value object / Took away value and added more code to verify the graph result
 5. Updated files weren't translating to page / Cached files were still being used that had my old code / Added a parameter '?v=2' to my html script
-### Resolution History
+
